@@ -1,12 +1,14 @@
 import requests
 import discord
 import os
+from datetime import datetime
 from dotenv import load_dotenv
 from time import time 
 
 start = int(time() * 1000)
 global snips
 global depTime
+now = datetime.now()
 
 load_dotenv()
 token = my_id = os.getenv("TOEKN") # paste your client id here
@@ -22,7 +24,10 @@ async def on_ready():
     print('Successfully logged in as {0.user}'.format(client))
     stop = int(time() * 1000)
     depTime = (stop - start)/1000
+    logDate = now.strftime("%d/%m/%Y %H:%M:%S")
+    print("At: {0}".format(logDate))
     print('In: {0}s'.format(depTime))
+    print("-------------------------------------------")
     return(depTime)
 
 @client.event
