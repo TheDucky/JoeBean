@@ -106,11 +106,30 @@ async def on_message(message):
         if " & example" in msg:
             wlex = snips["while_loop"][0]["example"]
             await message.channel.send('```java\n' + wlex + '\n```')
+    
+    # show them how to format the code.
+    if msg.startswith('$howto-run'):
+        await message.channel.send('**Please format your code like so:**\n\```java\n//Code block\n\```\n **If you fail to format your code in this manner the code will not run**')
+
+    # run java code
+    if msg.startswith('$run-code'):
+        Jfile = open("Main.java", "w") 
+        codeArr = msg.split()
+        del codeArr[0:2]
+        codeArr.pop()
+        code = ' '.join(codeArr)
+        Jfile.write(code)
+        Jfile.close()
+        try:
+          output = os.popen('java Main.java')
+          await message.channel.send(output.read())
+        except:
+          await message.channel.send('There were a few errors. Check them and try again')
 
     # help embed
     if message.content.startswith('$help'):
         help = discord.Embed(title="Help is here", color=0x964B00)
-        help.add_field(name="List of Commands", value="```-------------- \n$status \n$hello \n$simple-print \n$switch-case \n$do-while \n$if-else \n$for-loop \n$while-loop\n--------------\n```", inline=False)
+        help.add_field(name="List of Commands", value="```-------------- \n$status \n$hello \n$simple-print \n$switch-case \n$do-while \n$if-else \n$for-loop \n$while-loop \n$run-code \n--------------\n```", inline=False)
         await message.channel.send(embed=help)
 
 client.run(os.getenv('TOKEN'))
