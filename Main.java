@@ -1,1 +1,1 @@
-public class Main { public static void main(String[] args) { int q = 123; int w = 321; int add = q + w; System.out.println(add); } }
+public class Main { public static void main(String[] args) { while true { System.out.println("hi"); } } }
