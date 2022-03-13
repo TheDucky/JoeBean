@@ -1,0 +1,5 @@
+nohup python3 -u JoeBean.py >> nohup.out &
+
+ps -ef |grep 'python3 -u JoeBean.py'
+
+kill -9 <PID>

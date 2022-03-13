@@ -1,3 +1,4 @@
+import psutil
 import requests
 import discord
 import os
@@ -25,8 +26,10 @@ async def on_ready():
     stop = int(time() * 1000)
     depTime = (stop - start)/1000
     logDate = now.strftime("%d/%m/%Y %H:%M:%S")
+    pid = os.popen("ps -ef | grep 'python3 -u JoeBean.py' | awk 'NR==1{print $2}'")
     print("At: {0}".format(logDate))
     print('In: {0}s'.format(depTime))
+    print('killSwitch: {0}'.format(pid.read()))
     print("-------------------------------------------")
     return(depTime)
 
