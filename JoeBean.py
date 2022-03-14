@@ -41,9 +41,14 @@ async def on_message(message):
     msg = message.content
 
     #check bot and server status
-    #                           #
-    #    STILL WORKING ON IT    #
-    #############################
+    if msg.startswith('$status'):
+        name = message.author.mention
+        await message.channel.send(name)
+        print(name)
+        if name == '<@775405500028289044>':
+            await message.channel.send("Only you can use this command")
+        else:
+            await message.channel.send("sorry buddy, you dont have access to this command")
 
     # say hello!
     if msg.startswith('$hello'):
