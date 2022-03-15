@@ -54,15 +54,15 @@ async def on_message(message):
     if msg.startswith('$hello'):
         await message.channel.send('Well hello there :)')
 
+    snips = loadAPI()
+
     # output a simple print statement 
     if msg.startswith('$simple-print'):
-        snips = loadAPI()
         sp = snips["simple_print"][0]["snip"]
         await message.channel.send('```java\n' + sp + '\n```')
 
     # switch case and its example 
     if msg.startswith('$switch-case'):
-        snips = loadAPI()
         sc = snips["switch_case"][0]["snip"]
         await message.channel.send('```java\n' + sc + '\n```')
         await message.channel.send('If you want an example add `& example` at the end of the command')
@@ -73,7 +73,6 @@ async def on_message(message):
 
     # do while and its example
     if msg.startswith('$do-while'):
-        snips = loadAPI()
         dw = snips["do_while"][0]["snip"]
         await message.channel.send('```java\n' + dw + '\n```')
         await message.channel.send('If you want an example add `& example` at the end of the command')
@@ -84,7 +83,6 @@ async def on_message(message):
 
     # if else and its example
     if msg.startswith('$if-else'):
-        snips = loadAPI()
         ie = snips["if_else"][0]["snip"]
         await message.channel.send('```java\n' + ie + '\n```')
         await message.channel.send('If you want an example add `& example` at the end of the command')
@@ -95,7 +93,6 @@ async def on_message(message):
     
     # for loop and its example
     if msg.startswith('$for-loop'):
-        snips = loadAPI()
         fl = snips["for_loop"][0]["snip"]
         await message.channel.send('```java\n' + fl + '\n```')
         await message.channel.send('If you want an example add `& example` at the end of the command')
@@ -106,7 +103,6 @@ async def on_message(message):
 
     # while loop and its example
     if msg.startswith('$while-loop'):
-        snips = loadAPI()
         wl = snips["while_loop"][0]["snip"]
         await message.channel.send('```java\n' + wl + '\n```')
         await message.channel.send('If you want an example add `& example` at the end of the command')
