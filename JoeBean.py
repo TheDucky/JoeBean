@@ -20,6 +20,8 @@ def loadAPI():
     snips = raw.json()
     return(snips)
 
+snips = loadAPI()
+
 @client.event
 async def on_ready():
     print('Successfully logged in as {0.user}'.format(client))
@@ -39,6 +41,8 @@ async def on_message(message):
         return
 
     msg = message.content
+    
+    global snips
 
     #check bot and server status
     if msg.startswith('$status'):
@@ -53,8 +57,6 @@ async def on_message(message):
     # say hello!
     if msg.startswith('$hello'):
         await message.channel.send('Well hello there :)')
-
-    snips = loadAPI()
 
     # output a simple print statement 
     if msg.startswith('$simple-print'):
@@ -136,5 +138,10 @@ async def on_message(message):
         help = discord.Embed(title="Help is here", color=0x964B00)
         help.add_field(name="List of Commands", value="```-------------- \n$status \n$hello \n$simple-print \n$switch-case \n$do-while \n$if-else \n$for-loop \n$while-loop \n$run-code \n--------------\n```", inline=False)
         await message.channel.send(embed=help)
+    
+    # update snippets command
+    if message.content.startswith('$update'):
+        snips = loadAPI()
+        await message.channel.send('All code snippets is updated')
 
 client.run(os.getenv('TOKEN'))
