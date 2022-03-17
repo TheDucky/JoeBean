@@ -113,7 +113,7 @@ async def on_message(message):
     
     # show them how to format the code.
     if msg.startswith('$howto-run'):
-        await message.channel.send('**Please format your code like so:**\n\```java\n//Code block\n\```\n **If you fail to format your code in this manner the code will not run**')
+        await message.channel.send('**Please format your code like so:**\n$run-code\n\```java\n//Code block\n\```\n **If you fail to format your code in this manner the code will not run**')
 
     # run java code
     if msg.startswith('$run-code'):
@@ -125,11 +125,11 @@ async def on_message(message):
         Jfile.write(code)
         Jfile.close()
         try:
-          output = os.popen('java Main.java')
-          await message.channel.send('Java OUTPUT for: {0}'.format(message.author.mention))
-          await message.channel.send('```\n{0}\n```'.format(output.read()))
+            output = os.popen('java Main.java')
+            await message.channel.send('Java OUTPUT for: {0}'.format(message.author.mention))
+            await message.channel.send('```\n{0}\n```'.format(output.read()))
         except:
-          await message.channel.send('There were a few errors. Check them and try again')
+            await message.channel.send('There were a few errors. Check them and try again')
 
     # help embed
     if message.content.startswith('$help'):
