@@ -1,4 +1,5 @@
-import psutil
+from pyston import PystonClient, File
+import asyncio
 import requests
 import discord
 import os
@@ -126,12 +127,21 @@ async def on_message(message):
         code = ' '.join(codeArr)
         Jfile.write(code)
         Jfile.close()
-        try:
-            output = os.popen('java Main.java')
-            await message.channel.send('Java OUTPUT using version:`openjdk 11.0.14` for: {0}'.format(message.author.mention))
-            await message.channel.send('```\n{0}\n```'.format(output.read()))
-        except:
-            await message.channel.send('There were a few errors. Check them and try again')
+
+        with open('Main.java') as jCode:
+            file = File(jCode)
+        piston = PystonClient()
+        output = await piston.execute("java", [file])
+        await message.channel.send('Java OUTPUT for: {0}'.format(message.author.mention))
+        await message.channel.send('```\n{0}\n```'.format(output))
+
+        # old code.
+        #try:
+        #    output = os.popen('java Main.java')
+        #    await message.channel.send('Java OUTPUT using version:`openjdk 11.0.14` for: {0}'.format(message.author.mention))
+        #    await message.channel.send('```\n{0}\n```'.format(output.read()))
+        #except:
+        #    await message.channel.send('There were a few errors. Check them and try again')
 
     # help embed
     if message.content.startswith('$help'):
