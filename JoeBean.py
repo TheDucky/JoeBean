@@ -128,7 +128,7 @@ async def on_message(message):
         Jfile.close()
         try:
             output = os.popen('java Main.java')
-            await message.channel.send('Java OUTPUT for: {0}'.format(message.author.mention))
+            await message.channel.send('Java OUTPUT using version:`openjdk 11.0.14` for: {0}'.format(message.author.mention))
             await message.channel.send('```\n{0}\n```'.format(output.read()))
         except:
             await message.channel.send('There were a few errors. Check them and try again')
