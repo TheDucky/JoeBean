@@ -1,1 +1,0 @@
-public class Main { public static void main(String[] args) { String h = "hello!"; System.out.println(h); System.out.println(h.length()); } }

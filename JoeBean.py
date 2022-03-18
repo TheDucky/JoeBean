@@ -1,5 +1,4 @@
 from pyston import PystonClient, File
-import asyncio
 import requests
 import discord
 import os
@@ -120,18 +119,13 @@ async def on_message(message):
 
     # run java code
     if msg.startswith('$run-code'):
-        Jfile = open("Main.java", "w") 
         codeArr = msg.split()
         del codeArr[0:2]
         codeArr.pop()
         code = ' '.join(codeArr)
-        Jfile.write(code)
-        Jfile.close()
 
-        with open('Main.java') as jCode:
-            file = File(jCode)
         piston = PystonClient()
-        output = await piston.execute("java", [file])
+        output = await piston.execute("java", [File(code)])
         await message.channel.send('Java OUTPUT for: {0}'.format(message.author.mention))
         await message.channel.send('```\n{0}\n```'.format(output))
 
