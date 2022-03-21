@@ -1,3 +1,5 @@
+#! /bin/python3
+
 from pyston import PystonClient, File
 import requests
 import discord
@@ -51,13 +53,14 @@ async def on_message(message):
         print(name)
         if name == '<@775405500028289044>':
             await message.channel.send("Only you can use this command")
+        
         else:
             await message.channel.send("sorry buddy, you dont have access to this command")
 
     # say hello!
     if msg.startswith('$hello'):
         await message.channel.send('Well hello there :)')
-
+    
     # output a simple print statement 
     if msg.startswith('$simple-print'):
         sp = snips["simple_print"][0]["snip"]
@@ -148,4 +151,7 @@ async def on_message(message):
         snips = loadAPI()
         await message.channel.send('All code snippets is updated')
 
+    # dont ping Ducky
+    if '<@!775405500028289044>' in message.content:
+        await message.channel.send('AYO {0}, DONT PING HIM!'.format(message.author.mention))
 client.run(os.getenv('TOKEN'))
