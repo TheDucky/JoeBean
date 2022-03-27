@@ -151,7 +151,11 @@ async def on_message(message):
         snips = loadAPI()
         await message.channel.send('All code snippets is updated')
 
-    # dont ping Ducky
+    # dont ping us
     if '<@!775405500028289044>' in message.content:
         await message.channel.send('AYO {0}, DONT PING HIM!'.format(message.author.mention))
+
+    if '<@!756742321151934504>' in message.content:
+        await message.channel.send('AYO {0}, DONT PING HIM!'.format(message.author.mention))
+
 client.run(os.getenv('TOKEN'))
