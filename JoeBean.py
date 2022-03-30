@@ -14,7 +14,6 @@ global depTime
 now = datetime.now()
 
 load_dotenv()
-token = my_id = os.getenv("TOEKN") # paste your client id here
 client = discord.Client()
 
 def loadAPI():
